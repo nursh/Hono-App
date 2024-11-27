@@ -1,9 +1,16 @@
 import { OpenAPIHono } from "@hono/zod-openapi";
-import { logger } from "hono/logger";
 import { notFound, onError } from "stoker/middlewares";
 import { pinoLogger } from "./middlewares/pino-logger.js";
+import type { PinoLogger } from "hono-pino";
 
-const app = new OpenAPIHono();
+
+interface AppBindings {
+  Variables: {
+    logger: PinoLogger
+  }
+}
+
+const app = new OpenAPIHono<AppBindings>();
 app.use(pinoLogger());
 
 app.get('/', (c) => {
