@@ -10,9 +10,11 @@
   "dependencies": {
     "@hono/node-server": "^1.13.7",
     "@hono/zod-openapi": "^0.18.0",
+    "@libsql/client": "^0.14.0",
     "@scalar/hono-api-reference": "^0.5.162",
-    "dotenv": "^16.4.5",
+    "dotenv": "^16.4.7",
     "dotenv-expand": "^12.0.1",
+    "drizzle-orm": "^0.37.0",
     "hono": "^4.6.12",
     "hono-pino": "^0.7.0",
     "pino": "^9.5.0",
@@ -22,7 +24,8 @@
   },
   "devDependencies": {
     "@types/node": "^20.11.17",
+    "drizzle-kit": "^0.29.1",
     "eslint": "^9.15.0",
-    "tsx": "^4.7.1"
+    "tsx": "^4.19.2"
   }
 }
