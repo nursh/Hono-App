@@ -1,4 +1,4 @@
-import { insertTaskSchema, selectTasksSchema } from "@/db/schema.js";
+import { insertTaskSchema, patchTasksSchema, selectTasksSchema } from "@/db/schema.js";
 import { notFoundSchema } from "@/lib/constants.js";
 import { createRoute, z } from "@hono/zod-openapi";
 import * as HttpStatusCodes from 'stoker/http-status-codes';
@@ -56,8 +56,36 @@ export const getOne = createRoute({
       "Invalid id error"
     )
   }
+});
+
+export const patch = createRoute({
+  path: '/tasks/{id}',
+  method: 'patch',
+  request: {
+    params: IdParamsSchema,
+    body: jsonContentRequired(
+      patchTasksSchema,
+      "The task updates"
+    )
+  },
+  responses: {
+    [HttpStatusCodes.OK]: jsonContent(
+      selectTasksSchema,
+      "The updated task"
+    ),
+    [HttpStatusCodes.NOT_FOUND]: jsonContent(
+      notFoundSchema,
+      "Task not found"
+    ),
+    [HttpStatusCodes.UNPROCESSABLE_ENTITY]: jsonContent(
+      createErrorSchema(patchTasksSchema)
+        .or(createErrorSchema(IdParamsSchema)),
+      'The validation error(s)'
+    )
+  }
 })
 
 export type ListRoute = typeof list;
 export type CreateRoute = typeof create;
 export type GetOneRoute = typeof getOne;
+export type PatchRoute = typeof patch;
