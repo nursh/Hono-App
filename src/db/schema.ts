@@ -15,4 +15,12 @@ export const tasks = sqliteTable('tasks', {
 })
 
 export const selectTasksSchema = createSelectSchema(tasks);
-export const insertTaskSchema = createInsertSchema(tasks);
+export const insertTaskSchema = createInsertSchema(tasks, {
+  name: (schema) => schema.name.min(1).max(100)
+})
+  .required({ done: true })
+  .omit({
+    id: true,
+    createdAt: true,
+    updatedAt: true
+  });
