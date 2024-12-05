@@ -1,0 +1,13 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1733375261169,
+      "tag": "0000_round_vin_gonzales",
+      "breakpoints": true
+    }
+  ]
+}
